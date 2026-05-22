@@ -70,7 +70,7 @@ int random_float (float min, float max) {
     return dist(gen);
 }
 
-std::string getCPU() {
+std::string get_cpu_name() {
     std::ifstream file("/proc/cpuinfo");
     std::string line;
 
