@@ -97,3 +97,24 @@ std::string get_cpu_name() {
     }
     return "Unknown CPU";
 }
+
+// os name
+std::string get_os_name() {
+    std::ifstream file("/etc/os-release");
+    std::string line;
+
+    while (std::getline(file, line)) {
+        if (line.rfind("PRETTY_NAME=", 0) == 0) {
+            std::string value = line.substr(13); // remove "PRETTY_NAME="
+            
+            // remove quotes
+            if (!value.empty() && value.front() == '"')
+                value.erase(0, 1);
+            if (!value.empty() && value.back() == '"')
+                value.pop_back();
+
+            return value;
+        }
+    }
+    return "Unkown OS";
+}
